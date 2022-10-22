@@ -2,7 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
+import '../../view/home/home_screen.dart';
 import '../../view/login/login.dart';
+import '../../view/order/order.dart';
 import '../../view/splash/splash_screen.dart';
 
 class AppRoute {
@@ -14,6 +16,10 @@ class AppRoute {
         return SplashScreen.route();
       case LoginScreen.routeName:
         return LoginScreen.route();
+      case HomeScreen.routeName:
+        return HomeScreen.route();
+      case Ordescreen.routeName:
+        return Ordescreen.route();
 
       default:
         return _errorRoute();

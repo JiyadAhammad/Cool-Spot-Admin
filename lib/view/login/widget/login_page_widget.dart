@@ -8,16 +8,12 @@ class LoginPageWidget extends StatelessWidget {
   const LoginPageWidget({
     super.key,
     required this.buttonText,
-    required this.bottomText,
-    required this.page,
     required this.onPressed,
     this.fText = '',
     required this.ftextOnpressed,
   });
   final String buttonText;
-  final String bottomText;
   final Function() ftextOnpressed;
-  final String page;
   final String fText;
   final Function() onPressed;
 
@@ -91,18 +87,6 @@ class LoginPageWidget extends StatelessWidget {
               ],
             ),
             kheight,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(bottomText),
-                TextButton(
-                  onPressed: onPressed,
-                  child: Text(
-                    page,
-                  ),
-                ),
-              ],
-            ),
           ],
         ),
       ],

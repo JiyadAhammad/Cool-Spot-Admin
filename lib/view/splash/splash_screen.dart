@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 
 import '../constant/color/colors.dart';
 import '../constant/sizedbox/sizedbox.dart';
+import '../order/order.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
   static const String routeName = '/';
-  static Route<dynamic> route() {
-    return MaterialPageRoute<dynamic>(
+  static Route<Ordescreen> route() {
+    return MaterialPageRoute<Ordescreen>(
       settings: const RouteSettings(name: routeName),
       builder: (_) => const SplashScreen(),
     );

@@ -22,8 +22,6 @@ class LoginScreen extends StatelessWidget {
         fText: 'ForgetPasword ?',
         ftextOnpressed: () => Navigator.pushNamed(context, '/forget'),
         buttonText: 'Login',
-        bottomText: "Don't Have an Account?",
-        page: 'Signup',
         onPressed: () {
           Navigator.pushNamed(context, '/signup');
         },
