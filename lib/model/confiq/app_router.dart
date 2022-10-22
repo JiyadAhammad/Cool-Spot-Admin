@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
+import '../../view/login/login.dart';
 import '../../view/splash/splash_screen.dart';
 
 class AppRoute {
@@ -11,6 +12,8 @@ class AppRoute {
     switch (settings.name) {
       case '/':
         return SplashScreen.route();
+      case LoginScreen.routeName:
+        return LoginScreen.route();
 
       default:
         return _errorRoute();
