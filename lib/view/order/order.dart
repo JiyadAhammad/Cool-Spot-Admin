@@ -23,6 +23,7 @@ class Ordescreen extends StatelessWidget {
         child: CustomAppBar(barTitle: 'Orders', action: Icons.check),
         preferredSize: Size.fromHeight(50),
       ),
+      
       bottomNavigationBar: CustomNavBar(),
     );
   }

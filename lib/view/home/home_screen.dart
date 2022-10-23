@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../model/home/product_model.dart';
 import '../constant/color/colors.dart';
 import '../widget/custom_nav_bar.dart';
 import 'navigation_drawer/drawer.dart';
@@ -27,7 +28,25 @@ class HomeScreen extends StatelessWidget {
           action: Icons.add_circle,
         ),
       ),
-      bottomNavigationBar: CustomNavBar(),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child: ListView.builder(
+                itemCount: Product.products.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return SizedBox(
+                    height: 200,
+                    child: ProductCard(product: Product.products[index]),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: const CustomNavBar(),
     );
   }
 }
@@ -56,6 +75,28 @@ class CustomAppBar extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class ProductCard extends StatelessWidget {
+  const ProductCard({
+    super.key,
+    required this.product,
+  });
+
+  final Product product;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Column(
+        children: <Widget>[
+          Text(
+            product.name,
+          )
+        ],
+      ),
     );
   }
 }
