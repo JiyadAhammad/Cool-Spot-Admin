@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'model/confiq/app_router.dart';
 import 'view/addproduct/add_product.dart';
 import 'view/home/home_screen.dart';
 import 'view/login/login.dart';
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const SplashScreen(),
-      getPages: [
+      getPages: <GetPage<dynamic>>[
         GetPage<LoginScreen>(
           name: '/login',
           page: () => const LoginScreen(),
@@ -39,7 +38,7 @@ class MyApp extends StatelessWidget {
         ),
         GetPage<AddProduct>(
           name: '/addproduct',
-          page: () => AddProduct(),
+          page: () => const AddProduct(),
         ),
       ],
     );

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 
 class Product extends Equatable {
   const Product({
@@ -15,6 +14,24 @@ class Product extends Equatable {
     this.quantity = 0,
     this.price = 0,
   });
+
+
+  factory Product.fromMap(Map<String, dynamic> json) {
+    return Product(
+      id: json['id'],
+      name: json['name'] as String,
+      catergory: json['catergory'] as String,
+      decription: json['decription'] as String,
+      imageUrl: json['imageUrl'] as String,
+      isRecommended: json['isRecommended'] as bool,
+      isPopular: json['isPopular'] as bool,
+      price: json['price'] as double,
+      quantity: json['quantity'],
+    );
+  }
+
+  factory Product.fromJson(String source) =>
+      Product.fromMap(json.decode(source) as Map<String, dynamic>);
 
   final int id;
   final String name;
@@ -64,7 +81,7 @@ class Product extends Equatable {
   }
 
   Map<String, dynamic> toMap() {
-    return {
+    return <String, dynamic>{
       'id': id,
       'name': name,
       'catergory': catergory,
@@ -76,25 +93,7 @@ class Product extends Equatable {
       'quantity': quantity,
     };
   }
-
-  // ignore: sort_constructors_first
-  factory Product.fromMap(Map<String, dynamic> json) {
-    return Product(
-      id: json['id'] as int,
-      name: json['name'] as String,
-      catergory: json['catergory'] as String,
-      decription: json['decription'] as String,
-      imageUrl: json['imageUrl'] as String,
-      isRecommended: json['isRecommended'] as bool,
-      isPopular: json['isPopular'] as bool,
-      price: json['price'] as double,
-      quantity: json['quantity'] as int,
-    );
-  }
   String toJson() => json.encode(toMap());
-
-  factory Product.fromJson(String source) =>
-      Product.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   bool get stringify => true;

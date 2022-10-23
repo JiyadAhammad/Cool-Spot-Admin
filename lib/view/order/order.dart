@@ -27,7 +27,7 @@ class Ordescreen extends StatelessWidget {
           onPressed: () {},
         ),
       ),
-      bottomNavigationBar: CustomNavBar(),
+      bottomNavigationBar:const CustomNavBar(),
     );
   }
 }

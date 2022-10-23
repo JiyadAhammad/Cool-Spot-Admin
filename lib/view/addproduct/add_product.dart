@@ -33,6 +33,7 @@ class AddProduct extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.only(top: 20, left: 20),
         child: ListView(
+          physics: const BouncingScrollPhysics(),
           children: <Widget>[
             SizedBox(
               height: MediaQuery.of(context).size.width / 2,

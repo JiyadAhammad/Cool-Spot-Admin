@@ -25,11 +25,11 @@ class HomeScreen extends StatelessWidget {
       drawer: const Navdrawer(),
       backgroundColor: bgColor,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(50),
+        preferredSize:const Size.fromHeight(50),
         child: CustomAppBar(
           barTitle: 'Cool Spot',
           action: Icons.add_circle,
-          onPressed: () => Get.to(() => AddProduct()),
+          onPressed: () => Get.to(() =>const AddProduct()),
         ),
       ),
       body: Padding(
@@ -168,9 +168,9 @@ class ProductCard extends StatelessWidget {
 
 class SliderWidget extends StatelessWidget {
   const SliderWidget({
-    Key? key,
+    super.key,
     required this.product,
-  }) : super(key: key);
+  });
 
   final double product;
 
