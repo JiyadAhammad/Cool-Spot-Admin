@@ -20,10 +20,13 @@ class Ordescreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: bgColor,
       appBar: PreferredSize(
-        child: CustomAppBar(barTitle: 'Orders', action: Icons.check),
-        preferredSize: Size.fromHeight(50),
+        preferredSize: const Size.fromHeight(50),
+        child: CustomAppBar(
+          barTitle: 'Orders',
+          action: Icons.check,
+          onPressed: () {},
+        ),
       ),
-      
       bottomNavigationBar: CustomNavBar(),
     );
   }

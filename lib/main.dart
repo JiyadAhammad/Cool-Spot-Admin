@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'model/confiq/app_router.dart';
+import 'view/addproduct/add_product.dart';
 import 'view/home/home_screen.dart';
 import 'view/login/login.dart';
 import 'view/order/order.dart';
@@ -35,6 +36,10 @@ class MyApp extends StatelessWidget {
         GetPage<Ordescreen>(
           name: '/order',
           page: () => const Ordescreen(),
+        ),
+        GetPage<AddProduct>(
+          name: '/addproduct',
+          page: () => const AddProduct(),
         ),
       ],
     );

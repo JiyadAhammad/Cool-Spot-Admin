@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
+import '../../view/addproduct/add_product.dart';
 import '../../view/home/home_screen.dart';
 import '../../view/login/login.dart';
 import '../../view/order/order.dart';
@@ -20,6 +21,8 @@ class AppRoute {
         return HomeScreen.route();
       case Ordescreen.routeName:
         return Ordescreen.route();
+      case AddProduct.routeName:
+        return AddProduct.route();
 
       default:
         return _errorRoute();
