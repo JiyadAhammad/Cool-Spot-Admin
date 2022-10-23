@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         ),
         GetPage<AddProduct>(
           name: '/addproduct',
-          page: () => const AddProduct(),
+          page: () => AddProduct(),
         ),
       ],
     );

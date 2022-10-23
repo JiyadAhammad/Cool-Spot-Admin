@@ -29,7 +29,7 @@ class HomeScreen extends StatelessWidget {
         child: CustomAppBar(
           barTitle: 'Cool Spot',
           action: Icons.add_circle,
-          onPressed: () => Get.to(() => const AddProduct()),
+          onPressed: () => Get.to(() => AddProduct()),
         ),
       ),
       body: Padding(

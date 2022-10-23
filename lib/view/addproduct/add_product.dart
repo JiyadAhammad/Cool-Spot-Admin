@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../constant/color/colors.dart';
 import '../constant/sizedbox/sizedbox.dart';
@@ -46,7 +48,16 @@ class AddProduct extends StatelessWidget {
                     bottom: 10,
                     right: MediaQuery.of(context).size.width / 5,
                     child: RawMaterialButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        final ImagePicker picker = ImagePicker();
+
+                        final XFile? image = await picker.pickImage(
+                          source: ImageSource.gallery,
+                        );
+                        if (image == null) {
+                          Get.snackbar('', '');
+                        } else {}
+                      },
                       fillColor: const Color(0xFFF5F6F9),
                       padding: const EdgeInsets.all(15.0),
                       shape: const CircleBorder(),
