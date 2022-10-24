@@ -121,5 +121,16 @@ class Order extends Equatable {
       isdelivered: false,
       orderedDate: DateTime.now(),
     ),
+    Order(
+      id: 2,
+      cutomerId: 101,
+      productId: const <int>[3],
+      deliveryFee: 20,
+      subTotal: 60,
+      total: 80,
+      isAccepted: false,
+      isdelivered: false,
+      orderedDate: DateTime.now(),
+    ),
   ];
 }

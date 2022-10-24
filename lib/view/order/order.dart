@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import '../../model/order/order_model.dart';
 import '../../model/product/product_model.dart';
 import '../constant/color/colors.dart';
+import '../constant/sizedbox/sizedbox.dart';
 import '../home/home_screen.dart';
 import '../widget/custom_nav_bar.dart';
 
@@ -79,41 +80,94 @@ class OrderCardWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    ' order id${order.id}',
+                    ' order id: ${order.id}',
+                    style: const TextStyle(
+                      color: kblackText,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   Text(
                     DateFormat('dd-MM-yyyy').format(
                       order.orderedDate,
                     ),
+                    style: const TextStyle(
+                      color: kblackText,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
+              kheight,
               OrderProductList(product: product),
+              kheight,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   Column(
                     children: <Widget>[
-                      Text(
+                      const Text(
                         'Delivery Fee',
+                        style: TextStyle(
+                          color: kblackText,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       Text(
                         '${order.deliveryFee}',
+                        style: const TextStyle(
+                          color: kblackText,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),
                   Column(
                     children: <Widget>[
-                      Text(
-                        'Total',
+                      const Text(
+                        'Sub Total',
+                        style: TextStyle(
+                          color: kblackText,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       Text(
                         '${order.subTotal}',
+                        style: const TextStyle(
+                          color: kblackText,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: <Widget>[
+                      const Text(
+                        'Total',
+                        style: TextStyle(
+                          color: kblackText,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        '${order.total}',
+                        style: const TextStyle(
+                          color: kblackText,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),
                 ],
               ),
+              kheight,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
@@ -147,44 +201,62 @@ class OrderCardWidget extends StatelessWidget {
 
 class OrderProductList extends StatelessWidget {
   const OrderProductList({
-    Key? key,
+    super.key,
     required this.product,
-  }) : super(key: key);
+  });
 
   final List<Product> product;
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
       itemCount: product.length,
       shrinkWrap: true,
       itemBuilder: (BuildContext context, int index) {
-        return Row(
-          children: [
-            SizedBox(
-              width: 70,
-              height: 60,
-              child: Image.network(
-                product[index].imageUrl,
+        return Padding(
+          padding: const EdgeInsets.only(
+            bottom: 10,
+          ),
+          child: Row(
+            children: <Widget>[
+              SizedBox(
+                width: 70,
+                height: 60,
+                child: Image.network(
+                  product[index].imageUrl,
+                ),
               ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  product[index].name,
-                ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width / 1.5,
-                  child: Text(
-                    product[index].decription,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
+              kwidth,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    product[index].name,
+                    style: const TextStyle(
+                      color: kblackText,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-              ],
-            )
-          ],
+                  kheight5,
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 1.5,
+                    child: Text(
+                      product[index].decription,
+                      style: const TextStyle(
+                        color: kblackText,
+                        fontSize: 17,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  kheight5,
+                ],
+              )
+            ],
+          ),
         );
       },
     );
