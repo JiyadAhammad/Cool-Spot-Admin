@@ -48,22 +48,22 @@ class CustomNavBar extends StatelessWidget {
                 ),
               ),
             ),
-            // TextButton.icon(
-            //   onPressed: () {
-            //     Navigator.pushNamed(context, '/profile');
-            //   },
-            //   icon: const Icon(
-            //     Icons.person,
-            //     color: kwhite,
-            //     size: 35,
-            //   ),
-            //   label: const Text(
-            //     '',
-            //     style: TextStyle(
-            //       color: kwhiteText,
-            //     ),
-            //   ),
-            // ),
+            TextButton.icon(
+              onPressed: () {
+                Navigator.pushNamed(context, '/status');
+              },
+              icon: const Icon(
+                Icons.pie_chart,
+                color: kwhite,
+                size: 35,
+              ),
+              label: const Text(
+                'Status',
+                style: TextStyle(
+                  color: kwhiteText,
+                ),
+              ),
+            ),
           ],
         ),
       ),
