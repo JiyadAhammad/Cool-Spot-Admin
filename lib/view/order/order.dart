@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../model/order/order_model.dart';
 import '../constant/color/colors.dart';
 import '../home/home_screen.dart';
 import '../widget/custom_nav_bar.dart';
@@ -27,7 +28,25 @@ class Ordescreen extends StatelessWidget {
           onPressed: () {},
         ),
       ),
-      bottomNavigationBar:const CustomNavBar(),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: ListView.builder(
+              itemCount: Order.order.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Card(
+                  child: Column(
+                    children: [
+                      Text('${Order.order[index].id}'),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: const CustomNavBar(),
     );
   }
 }

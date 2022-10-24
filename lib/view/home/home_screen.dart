@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../model/home/product_model.dart';
+import '../../model/product/product_model.dart';
 import '../addproduct/add_product.dart';
 import '../constant/color/colors.dart';
 import '../constant/sizedbox/sizedbox.dart';
