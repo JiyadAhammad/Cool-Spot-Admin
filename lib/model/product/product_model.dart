@@ -15,7 +15,6 @@ class Product extends Equatable {
     this.price = 0,
   });
 
-
   factory Product.fromMap(Map<String, dynamic> json) {
     return Product(
       id: json['id'],
@@ -93,6 +92,7 @@ class Product extends Equatable {
       'quantity': quantity,
     };
   }
+
   String toJson() => json.encode(toMap());
 
   @override
@@ -126,7 +126,7 @@ class Product extends Equatable {
       quantity: 1,
     ),
     const Product(
-      id: 2,
+      id: 3,
       imageUrl:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcawjcJOFIRy1lq3EKx76d4qbV8MfN13CCjg&usqp=CAU',
       name: 'Fresh Lime',
@@ -139,7 +139,7 @@ class Product extends Equatable {
       quantity: 10,
     ),
     const Product(
-      id: 2,
+      id: 4,
       imageUrl:
           'https://loveincorporated.blob.core.windows.net/contentimages/main/1249b51f-4258-44f6-8414-221954ae6a79-waterbottlefacts.jpg',
       name: 'Mango Juice',
@@ -152,7 +152,7 @@ class Product extends Equatable {
       quantity: 5,
     ),
     const Product(
-      id: 2,
+      id: 5,
       imageUrl:
           'https://loveincorporated.blob.core.windows.net/contentimages/main/1249b51f-4258-44f6-8414-221954ae6a79-waterbottlefacts.jpg',
       name: 'Bisleri',
@@ -165,7 +165,7 @@ class Product extends Equatable {
       quantity: 25,
     ),
     const Product(
-      id: 2,
+      id: 6,
       imageUrl:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrTpIC4f7ooBZV6-A_Cpslt9IRRpGbVdoV8A&usqp=CAU',
       name: 'Kinley',
