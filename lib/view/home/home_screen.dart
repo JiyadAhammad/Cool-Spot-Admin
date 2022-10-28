@@ -117,18 +117,19 @@ class ProductCard extends StatelessWidget {
               maxLines: 4,
               overflow: TextOverflow.ellipsis,
             ),
-            Row(
-              children: <Widget>[
-                SizedBox(
-                  height: 50,
-                  child: Image.network(
-                    product.imageUrl,
-                    fit: BoxFit.cover,
+            Expanded(
+              child: Row(
+                children: <Widget>[
+                  SizedBox(
+                    height: 40,
+                    child: Image.network(
+                      product.imageUrl,
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                ),
-                kwidth,
-                Expanded(
-                  child: Column(
+                  kwidth5,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Row(
                         children: <Widget>[
@@ -137,7 +138,8 @@ class ProductCard extends StatelessWidget {
                           ),
                           SliderWidget(product: product.price),
                           Text(
-                            '₹ ${product.price}',
+                            '₹${product.price}',
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ],
                       ),
@@ -150,14 +152,14 @@ class ProductCard extends StatelessWidget {
                             product: product.quantity.toDouble(),
                           ),
                           Text(
-                            '₹ ${product.quantity}',
+                            '₹${product.quantity}',
                           ),
                         ],
                       ),
                     ],
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ],
         ),
@@ -176,13 +178,16 @@ class SliderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Slider(
-      value: product,
-      onChanged: (double value) {},
-      max: 100,
-      divisions: 5,
-      activeColor: kblackIcon,
-      inactiveColor: kbluegrey,
+    return SizedBox(
+      width: MediaQuery.of(context).size.width / 2,
+      child: Slider(
+        value: product,
+        onChanged: (double value) {},
+        max: 100,
+        divisions: 5,
+        activeColor: kblackIcon,
+        inactiveColor: kbluegrey,
+      ),
     );
   }
 }

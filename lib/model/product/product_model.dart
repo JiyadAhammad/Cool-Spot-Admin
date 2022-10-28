@@ -156,7 +156,7 @@ class Product extends Equatable {
       imageUrl:
           'https://loveincorporated.blob.core.windows.net/contentimages/main/1249b51f-4258-44f6-8414-221954ae6a79-waterbottlefacts.jpg',
       name: 'Bisleri',
-      price: 10.0,
+      price: 100.0,
       catergory: 'Water',
       isRecommended: false,
       isPopular: false,

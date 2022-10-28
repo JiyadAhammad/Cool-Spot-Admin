@@ -47,11 +47,6 @@ class AddProduct extends StatelessWidget {
               child: Stack(
                 fit: StackFit.expand,
                 children: <Widget>[
-                  CircleAvatar(
-                    backgroundImage: AssetImage(
-                      image.toString(),
-                    ),
-                  ),
                   Positioned(
                     bottom: 10,
                     right: MediaQuery.of(context).size.width / 5,
