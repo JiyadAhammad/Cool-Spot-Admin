@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 
 class Product extends Equatable {
-  const Product({
+  Product({
     required this.id,
     required this.name,
     required this.catergory,
@@ -39,8 +39,8 @@ class Product extends Equatable {
   final String imageUrl;
   final bool isRecommended;
   final bool isPopular;
-  final int quantity;
-  final double price;
+  int quantity;
+  double price;
 
   @override
   List<Object?> get props => <Object>[
@@ -99,7 +99,7 @@ class Product extends Equatable {
   bool get stringify => true;
 
   static List<Product> products = <Product>[
-    const Product(
+    Product(
       id: 1,
       imageUrl:
           'https://img.taste.com.au/RemyDecY/w720-h480-cfill-q80/taste/2020/01/jan20_easy-berry-smoothie-taste-156331-1.jpg',
@@ -112,7 +112,7 @@ class Product extends Equatable {
           'A soft drink is a drink that usually contains water, a sweetener, and a natural and/or artificial flavoring. The sweetener may be a sugar, high-fructose corn syrup, fruit juice, a sugar substitute, or some combination of these. Soft drinks may also contain caffeine, colorings, preservatives, and/or other ingredients.',
       quantity: 6,
     ),
-    const Product(
+    Product(
       id: 2,
       imageUrl:
           'https://3.imimg.com/data3/DS/UB/MY-14503484/soft-drink-500x500.png',
@@ -125,7 +125,7 @@ class Product extends Equatable {
           'A soft drink is a drink that usually contains water, a sweetener, and a natural and/or artificial flavoring. The sweetener may be a sugar, high-fructose corn syrup, fruit juice, a sugar substitute, or some combination of these. Soft drinks may also contain caffeine, colorings, preservatives, and/or other ingredients.',
       quantity: 1,
     ),
-    const Product(
+    Product(
       id: 3,
       imageUrl:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcawjcJOFIRy1lq3EKx76d4qbV8MfN13CCjg&usqp=CAU',
@@ -138,7 +138,7 @@ class Product extends Equatable {
           'Juice is a drink made from the extraction or pressing of the natural liquid contained in fruit and vegetables. It can also refer to liquids that are flavored with concentrate or other biological food sources, such as meat or seafood, such as clam juice',
       quantity: 10,
     ),
-    const Product(
+    Product(
       id: 4,
       imageUrl:
           'https://loveincorporated.blob.core.windows.net/contentimages/main/1249b51f-4258-44f6-8414-221954ae6a79-waterbottlefacts.jpg',
@@ -151,7 +151,7 @@ class Product extends Equatable {
           'Juice is a drink made from the extraction or pressing of the natural liquid contained in fruit and vegetables. It can also refer to liquids that are flavored with concentrate or other biological food sources, such as meat or seafood, such as clam juice',
       quantity: 5,
     ),
-    const Product(
+    Product(
       id: 5,
       imageUrl:
           'https://loveincorporated.blob.core.windows.net/contentimages/main/1249b51f-4258-44f6-8414-221954ae6a79-waterbottlefacts.jpg',
@@ -164,7 +164,7 @@ class Product extends Equatable {
           "Water is an inorganic, transparent, tasteless, odorless, and nearly colorless chemical substance, which is the main constituent of Earth's hydrosphere and the fluids of all known living organisms. It is vital for all known forms of life, despite providing neither food, energy, nor organic micronutrients.",
       quantity: 25,
     ),
-    const Product(
+    Product(
       id: 6,
       imageUrl:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrTpIC4f7ooBZV6-A_Cpslt9IRRpGbVdoV8A&usqp=CAU',

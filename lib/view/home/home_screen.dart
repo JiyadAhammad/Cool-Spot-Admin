@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../controller/product/product_controller.dart';
 import '../../model/product/product_model.dart';
 import '../addproduct/add_product.dart';
 import '../constant/color/colors.dart';
@@ -10,19 +11,21 @@ import '../widget/custom_nav_bar.dart';
 import 'navigation_drawer/drawer.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
 
   static const String routeName = '/home';
   static Route<HomeScreen> route() {
     return MaterialPageRoute<HomeScreen>(
       settings: const RouteSettings(name: routeName),
-      builder: (_) => const HomeScreen(),
+      builder: (_) => HomeScreen(),
     );
   }
 
+  final ProductController productController = Get.put(ProductController());
+
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser!;
+    // final User user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
       drawer: const Navdrawer(),
       backgroundColor: bgColor,
@@ -40,12 +43,15 @@ class HomeScreen extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: ListView.builder(
-                itemCount: Product.products.length,
+                itemCount: productController.products.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return SizedBox(
-                    height: 220,
-                    child: ProductCard(
-                      product: Product.products[index],
+                  return Obx(
+                    () => SizedBox(
+                      height: 220,
+                      child: ProductCard(
+                        product: productController.products[index],
+                        index: index,
+                      ),
                     ),
                   );
                 },
@@ -90,12 +96,15 @@ class CustomAppBar extends StatelessWidget {
 }
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({
+  ProductCard({
     super.key,
     required this.product,
+    required this.index,
   });
 
   final Product product;
+  final int index;
+  final ProductController productController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +147,23 @@ class ProductCard extends StatelessWidget {
                           const Text(
                             'Price',
                           ),
-                          SliderWidget(product: product.price),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width / 2,
+                            child: Slider(
+                              value: product.price,
+                              onChanged: (double value) {
+                                productController.updateProductPrice(
+                                  index,
+                                  product,
+                                  value,
+                                );
+                              },
+                              max: 100,
+                              divisions: 5,
+                              activeColor: kblackIcon,
+                              inactiveColor: kbluegrey,
+                            ),
+                          ),
                           Text(
                             '₹${product.price}',
                             overflow: TextOverflow.ellipsis,
@@ -150,9 +175,26 @@ class ProductCard extends StatelessWidget {
                           const Text(
                             'Qunty',
                           ),
-                          SliderWidget(
-                            product: product.quantity.toDouble(),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width / 2,
+                            child: Slider(
+                              value: product.quantity.toDouble(),
+                              onChanged: (double value) {
+                                productController.updateProductQuantity(
+                                  index,
+                                  product,
+                                  value.toInt(),
+                                );
+                              },
+                              max: 100,
+                              divisions: 5,
+                              activeColor: kblackIcon,
+                              inactiveColor: kbluegrey,
+                            ),
                           ),
+                          // SliderWidget(
+                          //   product: product.quantity.toDouble(),a: productController,
+                          // ),
                           Text(
                             '₹${product.quantity}',
                           ),
@@ -170,26 +212,28 @@ class ProductCard extends StatelessWidget {
   }
 }
 
-class SliderWidget extends StatelessWidget {
-  const SliderWidget({
-    super.key,
-    required this.product,
-  });
+// class SliderWidget extends StatelessWidget {
+//   const SliderWidget({
+//     super.key,
+//     required this.product,
+//     required this.a,
+//   });
 
-  final double product;
+//   final double product;
+//   final ProductController a;
 
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width / 2,
-      child: Slider(
-        value: product,
-        onChanged: (double value) {},
-        max: 100,
-        divisions: 5,
-        activeColor: kblackIcon,
-        inactiveColor: kbluegrey,
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       width: MediaQuery.of(context).size.width / 2,
+//       child: Slider(
+//         value: product,
+//         onChanged: (double value) {},
+//         max: 100,
+//         divisions: 5,
+//         activeColor: kblackIcon,
+//         inactiveColor: kbluegrey,
+//       ),
+//     );
+//   }
+// }

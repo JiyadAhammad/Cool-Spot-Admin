@@ -35,7 +35,7 @@ class LoginScreen extends StatelessWidget {
               child: Text('data'),
             );
           } else if (snapshot.hasData) {
-            return const HomeScreen();
+            return  HomeScreen();
           } else {
             return LoginPageWidget(
               ftextOnpressed: () => Navigator.pushNamed(context, '/forget'),
