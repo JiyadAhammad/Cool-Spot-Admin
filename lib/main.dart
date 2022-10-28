@@ -9,16 +9,10 @@ import 'view/order/order.dart';
 import 'view/splash/splash_screen.dart';
 import 'view/statistics/statistic.dart';
 
-// void main() {
-//   runApp(const MyApp());
-// }
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  // if (shouldUseFirestoreEmulator) {
-  //   FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
-  // }
   runApp(const MyApp());
 }
 

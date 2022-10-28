@@ -5,9 +5,11 @@ class LoginTextFormField extends StatelessWidget {
     super.key,
     required this.prefixIcon,
     required this.hintText,
+    required this.userInput,
   });
   final IconData prefixIcon;
   final String hintText;
+  final TextEditingController userInput;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class LoginTextFormField extends StatelessWidget {
         vertical: 10,
       ),
       child: TextFormField(
-        // controller: userInput,
+        controller: userInput,
         style: const TextStyle(
           fontSize: 24,
           color: Colors.blue,

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -58,6 +59,11 @@ class Navdrawer extends StatelessWidget {
                 ],
               );
             },
+          ),
+          DrawerListTile(
+            text: 'Logout',
+            leadingIcon: Icons.logout,
+            onTap: () => FirebaseAuth.instance.signOut(),
           ),
           DrawerListTile(
             text: 'Exit',

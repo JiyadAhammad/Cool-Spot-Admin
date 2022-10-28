@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../constant/color/colors.dart';
+import '../home/home_screen.dart';
 import 'widget/login_page_widget.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -18,12 +20,21 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: bgColor,
-      body: LoginPageWidget(
-        fText: 'ForgetPasword ?',
-        ftextOnpressed: () => Navigator.pushNamed(context, '/forget'),
-        buttonText: 'Login',
-        onPressed: () {
-          Navigator.pushNamed(context, '/signup');
+      body: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
+          if (snapshot.hasData) {
+            return const HomeScreen();
+          } else {
+            return LoginPageWidget(
+              fText: 'ForgetPasword ?',
+              ftextOnpressed: () => Navigator.pushNamed(context, '/forget'),
+              buttonText: 'Login',
+              onPressed: () {
+                Navigator.pushNamed(context, '/signup');
+              },
+            );
+          }
         },
       ),
     );
