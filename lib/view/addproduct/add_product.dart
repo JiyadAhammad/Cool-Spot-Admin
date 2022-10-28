@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../controller/product/product_controller.dart';
 import '../../service/storage_service/storage_service.dart';
 import '../constant/color/colors.dart';
 import '../constant/sizedbox/sizedbox.dart';
@@ -22,6 +23,7 @@ class AddProduct extends StatelessWidget {
   }
 
   final StorageService storage = StorageService();
+  final ProductController productController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -33,99 +35,146 @@ class AddProduct extends StatelessWidget {
         onPressed: () {},
       ),
       body: Padding(
-        padding: const EdgeInsets.only(top: 20, left: 20),
-        child: ListView(
-          physics: const BouncingScrollPhysics(),
-          children: <Widget>[
-            SizedBox(
-              height: MediaQuery.of(context).size.width / 2,
-              child: Stack(
-                fit: StackFit.expand,
-                children: <Widget>[
-                  Positioned(
-                    bottom: 10,
-                    right: MediaQuery.of(context).size.width / 5,
-                    child: RawMaterialButton(
-                      onPressed: () async {
-                        final ImagePicker picker = ImagePicker();
-
-                        final XFile? image = await picker.pickImage(
-                          source: ImageSource.gallery,
-                        );
-                        if (image == null) {
-                          Get.snackbar('no Image selected', '');
-                        }
-                        if (image != null) {
-                          await storage.uploadImage(image);
-                          try {
-                            var imageUrl =
-                                await storage.getDownloadURL(image.name);
-                          } catch (e) {
-                            log(e.toString());
-                          }
-                        }
-                      },
-                      fillColor: const Color(0xFFF5F6F9),
-                      padding: const EdgeInsets.all(15.0),
-                      shape: const CircleBorder(),
-                      child: const Icon(
-                        Icons.camera_alt_outlined,
-                        color: Colors.blue,
+        padding: const EdgeInsets.only(top: 20, left: 15, right: 15),
+        child: Obx(
+          () => ListView(
+            physics: const BouncingScrollPhysics(),
+            children: <Widget>[
+              SizedBox(
+                height: MediaQuery.of(context).size.width / 4,
+                child: GestureDetector(
+                  onTap: () async {
+                    final ImagePicker picker = ImagePicker();
+                    final XFile? image = await picker.pickImage(
+                      source: ImageSource.gallery,
+                    );
+                    if (image == null) {
+                      Get.snackbar(
+                        "Could't find Path",
+                        'Please Select an Image',
+                        snackPosition: SnackPosition.BOTTOM,
+                        colorText: kwhiteText,
+                        backgroundColor: kblack,
+                      );
+                    }
+                    if (image != null) {
+                      log(image.path);
+                    }
+                  },
+                  child: Card(
+                    margin: EdgeInsets.zero,
+                    color: kblack,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                      ),
+                      child: Row(
+                        children: const <Widget>[
+                          Icon(
+                            Icons.add_a_photo,
+                            color: kwhiteIcon,
+                          ),
+                          kwidth20,
+                          Text(
+                            'Add a Image',
+                            style: TextStyle(
+                              color: kwhiteText,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ],
                       ),
                     ),
                   ),
+                ),
+              ),
+              kheight,
+              textFormFeild('Product Category'),
+              textFormFeild('Product Name'),
+              // textFormFeild('Product Price'),
+              textFormFeild('Product Description'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  checkBoxWidget(
+                    'Recommended',
+                    'isRecommended',
+                    productController,
+                    productController.isRecommended,
+                  ),
+                  checkBoxWidget(
+                    'Popular',
+                    'isPopular',
+                    productController,
+                    productController.isPopular,
+                  ),
                 ],
               ),
-            ),
-            kheight,
-            textFormFeild('Product ID'),
-            textFormFeild('Product Name'),
-            textFormFeild('Product Price'),
-            textFormFeild('Product Description'),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                checkBoxWidget('Recommended'),
-                checkBoxWidget('Popular'),
-              ],
-            ),
-            sliderWidget('Price'),
-            sliderWidget('Qanty'),
-            Center(
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: kblack,
-                ),
-                onPressed: () {},
-                icon: const Icon(Icons.check),
-                label: const Text('SAVE'),
+              sliderWidget(
+                'Price',
+                'price',
+                productController,
+                productController.price,
               ),
-            )
-          ],
+              sliderWidget(
+                'Qanty',
+                'quantity',
+                productController,
+                productController.quantity,
+              ),
+              Center(
+                child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: kblack,
+                  ),
+                  onPressed: () {},
+                  icon: const Icon(Icons.check),
+                  label: const Text('SAVE'),
+                ),
+              )
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: const CustomNavBar(),
     );
   }
 
-  Row checkBoxWidget(String value) {
+  Row checkBoxWidget(
+    String title,
+    String name,
+    ProductController productController,
+    dynamic contrllerValue,
+  ) {
     return Row(
       children: <Widget>[
         Text(
-          value,
+          title,
           style: const TextStyle(
             fontSize: 20,
           ),
         ),
         Checkbox(
-          value: false,
-          onChanged: (bool? value) {},
+          value: (contrllerValue ?? true) as bool,
+          onChanged: (bool? value) {
+            productController.newProduct.update(
+              name,
+              (_) => value,
+              ifAbsent: () => value,
+            );
+          },
         ),
       ],
     );
   }
 
-  Row sliderWidget(String text) {
+  Row sliderWidget(
+    String text,
+    String name,
+    ProductController productController,
+    dynamic contrllerValue,
+  ) {
     return Row(
       children: <Widget>[
         Text(
@@ -137,8 +186,14 @@ class AddProduct extends StatelessWidget {
         kwidtht50,
         Expanded(
           child: Slider(
-            value: 0,
-            onChanged: (double value) {},
+            value: (contrllerValue == null) ? 0 : contrllerValue as double,
+            onChanged: (double value) {
+              productController.newProduct.update(
+                name,
+                (_) => value,
+                ifAbsent: () => value,
+              );
+            },
             max: 25,
             divisions: 10,
             activeColor: kblackIcon,
