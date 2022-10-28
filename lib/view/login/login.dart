@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../constant/color/colors.dart';
@@ -23,11 +24,20 @@ class LoginScreen extends StatelessWidget {
       body: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
-          if (snapshot.hasData) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CupertinoActivityIndicator(
+                color: kblackIcon,
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return const Center(
+              child: Text('data'),
+            );
+          } else if (snapshot.hasData) {
             return const HomeScreen();
           } else {
             return LoginPageWidget(
-              fText: 'ForgetPasword ?',
               ftextOnpressed: () => Navigator.pushNamed(context, '/forget'),
               buttonText: 'Login',
               onPressed: () {

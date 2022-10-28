@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../main.dart';
 import '../../constant/color/colors.dart';
 import '../../constant/sizedbox/sizedbox.dart';
 import 'login_text_feild.dart';
@@ -10,12 +14,10 @@ class LoginPageWidget extends StatefulWidget {
     super.key,
     required this.buttonText,
     required this.onPressed,
-    this.fText = '',
     required this.ftextOnpressed,
   });
   final String buttonText;
   final Function() ftextOnpressed;
-  final String fText;
   final Function() onPressed;
 
   @override
@@ -48,6 +50,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
             Image.asset('assets/images/login.png'),
           ],
         ),
+        kheight50,
         Column(
           children: <Widget>[
             LoginTextFormField(
@@ -60,15 +63,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
               prefixIcon: Icons.https,
               hintText: 'Password',
             ),
-            TextButton(
-              onPressed: widget.ftextOnpressed,
-              child: Text(
-                widget.fText,
-                style: const TextStyle(
-                  color: kgreen,
-                ),
-              ),
-            ),
+            kheight20,
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: kblack,
@@ -81,9 +76,6 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                 ),
               ),
               onPressed: signIn,
-              // onPressed: () {
-              //   // Navigator.pushReplacementNamed(context, '/home');
-              // },
               child: Text(
                 widget.buttonText,
                 style: const TextStyle(
@@ -93,20 +85,6 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
               ),
             ),
             kheight20,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                GestureDetector(
-                  onTap: () {},
-                  child: Image.asset('assets/images/facebook.png'),
-                ),
-                GestureDetector(
-                  onTap: () {},
-                  child: Image.asset('assets/images/google.png'),
-                ),
-              ],
-            ),
-            kheight,
           ],
         ),
       ],
@@ -114,9 +92,24 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
   }
 
   Future<void> signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: userEmail.text.trim(),
-      password: userPassword.text.trim(),
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (_) => const Center(
+              child: CupertinoActivityIndicator(),
+            ));
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: userEmail.text.trim(),
+        password: userPassword.text.trim(),
+      );
+    } on FirebaseAuthException catch (e) {
+      log(
+        e.toString(),
+      );
+    }
+    navigatorKey.currentState!.popUntil(
+      (Route<dynamic> route) => route.isFirst,
     );
   }
 }

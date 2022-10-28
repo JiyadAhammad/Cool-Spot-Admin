@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../constant/color/colors.dart';
+
 class LoginTextFormField extends StatelessWidget {
   const LoginTextFormField({
     super.key,
@@ -21,9 +23,9 @@ class LoginTextFormField extends StatelessWidget {
       child: TextFormField(
         controller: userInput,
         style: const TextStyle(
-          fontSize: 24,
-          color: Colors.blue,
-          fontWeight: FontWeight.w600,
+          fontSize: 20,
+          color: kblackText,
+          fontWeight: FontWeight.w400,
         ),
         decoration: InputDecoration(
           focusColor: Colors.white,
