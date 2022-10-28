@@ -5,7 +5,9 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../controller/product/product_controller.dart';
-import '../../service/storage_service/storage_service.dart';
+import '../../model/product/product_model.dart';
+import '../../service/database/database_service.dart';
+import '../../service/storage/storage_service.dart';
 import '../constant/color/colors.dart';
 import '../constant/sizedbox/sizedbox.dart';
 import '../widget/custom_app_bar.dart';
@@ -23,6 +25,7 @@ class AddProduct extends StatelessWidget {
   }
 
   final StorageService storage = StorageService();
+  final DataBaseService dataBaseService = DataBaseService();
   final ProductController productController = Get.find();
 
   @override
@@ -58,7 +61,17 @@ class AddProduct extends StatelessWidget {
                       );
                     }
                     if (image != null) {
-                      log(image.path);
+                      log('${image.path} this th direct path');
+                      await storage.uploadImage(image);
+                      final String imageUrl =
+                          await storage.getDownloadURL(image.name);
+
+                      productController.newProduct.update(
+                        'imageUrl',
+                        (_) => imageUrl,
+                        ifAbsent: () => imageUrl,
+                      );
+                      log('${productController.newProduct['imageUrl']} this is the controlller');
                     }
                   },
                   child: Card(
@@ -73,13 +86,14 @@ class AddProduct extends StatelessWidget {
                           Icon(
                             Icons.add_a_photo,
                             color: kwhiteIcon,
+                            size: 30,
                           ),
                           kwidth20,
                           Text(
                             'Add a Image',
                             style: TextStyle(
                               color: kwhiteText,
-                              fontSize: 20,
+                              fontSize: 24,
                               fontWeight: FontWeight.bold,
                             ),
                           )
@@ -90,10 +104,27 @@ class AddProduct extends StatelessWidget {
                 ),
               ),
               kheight,
-              textFormFeild('Product Category'),
-              textFormFeild('Product Name'),
-              // textFormFeild('Product Price'),
-              textFormFeild('Product Description'),
+              textFormFeild(
+                'Product ID',
+                'id',
+                productController,
+              ),
+              textFormFeild(
+                'Product Category',
+                'Category',
+                productController,
+              ),
+              textFormFeild(
+                'Product Name',
+                'Name',
+                productController,
+              ),
+              // textFormFeild('Product Price','product',productController,),
+              textFormFeild(
+                'Product Description',
+                'Description',
+                productController,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
@@ -114,12 +145,14 @@ class AddProduct extends StatelessWidget {
               sliderWidget(
                 'Price',
                 'price',
+                100,
                 productController,
                 productController.price,
               ),
               sliderWidget(
                 'Qanty',
                 'quantity',
+                25,
                 productController,
                 productController.quantity,
               ),
@@ -128,7 +161,28 @@ class AddProduct extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: kblack,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    log('${productController.newProduct} this is lsit of map');
+                    dataBaseService.addProduct(
+                      Product(
+                        id: productController.newProduct['id'] as int,
+                        name: productController.newProduct['name'] as String,
+                        catergory:
+                            productController.newProduct['catergory'] as String,
+                        decription: productController.newProduct['decription']
+                            as String,
+                        imageUrl:
+                            productController.newProduct['imageUrl'] as String,
+                        isRecommended: productController
+                            .newProduct['isRecommended'] as bool,
+                        isPopular:
+                            productController.newProduct['isPopular'] as bool,
+                        price: productController.newProduct['price'] as double,
+                        quantity:
+                            productController.newProduct['quantity'] as int,
+                      ),
+                    );
+                  },
                   icon: const Icon(Icons.check),
                   label: const Text('SAVE'),
                 ),
@@ -156,7 +210,18 @@ class AddProduct extends StatelessWidget {
           ),
         ),
         Checkbox(
-          value: (contrllerValue ?? true) as bool,
+          value: (contrllerValue ?? false) as bool,
+          checkColor: kwhiteIcon,
+          fillColor: MaterialStateProperty.resolveWith<Color>(
+            (Set<MaterialState> states) {
+              if (states.contains(
+                MaterialState.disabled,
+              )) {
+                return kblackIcon.withOpacity(.32);
+              }
+              return kblackIcon;
+            },
+          ),
           onChanged: (bool? value) {
             productController.newProduct.update(
               name,
@@ -172,6 +237,7 @@ class AddProduct extends StatelessWidget {
   Row sliderWidget(
     String text,
     String name,
+    double maxValue,
     ProductController productController,
     dynamic contrllerValue,
   ) {
@@ -194,7 +260,7 @@ class AddProduct extends StatelessWidget {
                 ifAbsent: () => value,
               );
             },
-            max: 25,
+            max: maxValue,
             divisions: 10,
             activeColor: kblackIcon,
             inactiveColor: kbluegrey,
@@ -204,7 +270,11 @@ class AddProduct extends StatelessWidget {
     );
   }
 
-  Padding textFormFeild(String hintText) {
+  Padding textFormFeild(
+    String hintText,
+    String name,
+    ProductController productController,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 10,
@@ -220,6 +290,13 @@ class AddProduct extends StatelessWidget {
             ),
           ),
         ),
+        onChanged: (String value) {
+          productController.newProduct.update(
+            name,
+            (_) => value,
+            ifAbsent: () => value,
+          );
+        },
       ),
     );
   }

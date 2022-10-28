@@ -15,22 +15,21 @@ class Product extends Equatable {
     this.price = 0,
   });
 
-  factory Product.fromMap(Map<String, dynamic> json) {
+  factory Product.fromSnapshot(snap) {
     return Product(
-      id: json['id'],
-      name: json['name'] as String,
-      catergory: json['catergory'] as String,
-      decription: json['decription'] as String,
-      imageUrl: json['imageUrl'] as String,
-      isRecommended: json['isRecommended'] as bool,
-      isPopular: json['isPopular'] as bool,
-      price: json['price'] as double,
-      quantity: json['quantity'],
+      id: snap['id'] as int,
+      name: snap['name'] as String,
+      catergory: snap['catergory'] as String,
+      decription: snap['decription'] as String,
+      imageUrl: snap['imageUrl'] as String,
+      isRecommended: snap['isRecommended'] as bool,
+      isPopular: snap['isPopular'] as bool,
+      price: snap['price'] as double,
+      quantity: snap['quantity'] as int,
     );
   }
 
-  factory Product.fromJson(String source) =>
-      Product.fromMap(json.decode(source) as Map<String, dynamic>);
+ 
 
   final int id;
   final String name;
