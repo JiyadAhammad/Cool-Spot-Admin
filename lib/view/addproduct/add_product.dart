@@ -1,22 +1,29 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../service/storage_service/storage_service.dart';
 import '../constant/color/colors.dart';
 import '../constant/sizedbox/sizedbox.dart';
 import '../home/home_screen.dart';
 import '../widget/custom_nav_bar.dart';
 
 class AddProduct extends StatelessWidget {
-  const AddProduct({super.key});
+  AddProduct({super.key});
 
   static const String routeName = '/addproduct';
   static Route<AddProduct> route() {
     return MaterialPageRoute<AddProduct>(
       settings: const RouteSettings(name: routeName),
-      builder: (_) => const AddProduct(),
+      builder: (_) => AddProduct(),
     );
   }
+
+  StorageService storage = StorageService();
+  String? imageUrl;
+  XFile? image;
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +47,9 @@ class AddProduct extends StatelessWidget {
               child: Stack(
                 fit: StackFit.expand,
                 children: <Widget>[
-                  const CircleAvatar(
+                  CircleAvatar(
                     backgroundImage: AssetImage(
-                      'assets/images/splashImage.png',
+                      image.toString(),
                     ),
                   ),
                   Positioned(
@@ -52,12 +59,23 @@ class AddProduct extends StatelessWidget {
                       onPressed: () async {
                         final ImagePicker picker = ImagePicker();
 
-                        final XFile? image = await picker.pickImage(
+                        image = await picker.pickImage(
                           source: ImageSource.gallery,
                         );
                         if (image == null) {
-                          Get.snackbar('', '');
-                        } else {}
+                          Get.snackbar('no Image selected', '');
+                        }
+                        if (image != null) {
+                          await storage.uploadImage(image!);
+                          try {
+                            imageUrl =
+                                await storage.getDownloadURL(image!.name);
+                          } catch (e) {
+                            log(e.toString());
+                          }
+
+                          log(imageUrl!);
+                        }
                       },
                       fillColor: const Color(0xFFF5F6F9),
                       padding: const EdgeInsets.all(15.0),

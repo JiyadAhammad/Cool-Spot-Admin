@@ -25,11 +25,11 @@ class HomeScreen extends StatelessWidget {
       drawer: const Navdrawer(),
       backgroundColor: bgColor,
       appBar: PreferredSize(
-        preferredSize:const Size.fromHeight(50),
+        preferredSize: const Size.fromHeight(50),
         child: CustomAppBar(
           barTitle: 'Cool Spot',
           action: Icons.add_circle,
-          onPressed: () => Get.to(() =>const AddProduct()),
+          onPressed: () => Get.to(() => AddProduct()),
         ),
       ),
       body: Padding(
