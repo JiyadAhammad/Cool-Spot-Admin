@@ -156,13 +156,13 @@ class Product extends Equatable {
       imageUrl:
           'https://loveincorporated.blob.core.windows.net/contentimages/main/1249b51f-4258-44f6-8414-221954ae6a79-waterbottlefacts.jpg',
       name: 'Bisleri',
-      price: 100.0,
+      price: 10.0,
       catergory: 'Water',
       isRecommended: false,
       isPopular: false,
       decription:
           "Water is an inorganic, transparent, tasteless, odorless, and nearly colorless chemical substance, which is the main constituent of Earth's hydrosphere and the fluids of all known living organisms. It is vital for all known forms of life, despite providing neither food, energy, nor organic micronutrients.",
-      quantity: 25,
+      quantity: 20,
     ),
     Product(
       id: 6,

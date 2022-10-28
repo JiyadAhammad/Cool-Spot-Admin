@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../model/order/order_model.dart';
 import '../../model/statistic/statistic_model.dart';
 import '../constant/color/colors.dart';
-import '../home/home_screen.dart';
+import '../widget/custom_app_bar.dart';
 import '../widget/custom_nav_bar.dart';
 import 'widget/bar_chart.dart';
 
@@ -22,13 +21,10 @@ class StatisicScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: bgColor,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(50),
-        child: CustomAppBar(
-          barTitle: 'Statistic',
-          action: Icons.check,
-          onPressed: () {},
-        ),
+      appBar: CustomAppBar(
+        barTitle: 'Statistic',
+        action: Icons.check,
+        onPressed: () {},
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(

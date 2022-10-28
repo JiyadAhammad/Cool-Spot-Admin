@@ -3,6 +3,21 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 
 class Order extends Equatable {
+
+  factory Order.fromSnapshot(snap) {
+    return Order(
+      id: snap['id'] as int,
+      cutomerId: snap['cutomerId'] as int,
+      productId: snap['productId'] as List<int>,
+      deliveryFee: snap['deliveryFee'] as double,
+      subTotal: snap['subTotal'] as double,
+      total: snap['total'] as double,
+      isAccepted: snap['isAccepted'] as bool,
+      isdelivered: snap['isdelivered'] as bool,
+      orderedDate:
+          DateTime.fromMillisecondsSinceEpoch(snap['orderedDate'] as int),
+    );
+  }
   const Order({
     required this.id,
     required this.cutomerId,
@@ -61,21 +76,6 @@ class Order extends Equatable {
       'isdelivered': isdelivered,
       'ordered': orderedDate,
     };
-  }
-
-  factory Order.fromSnapshot(snap) {
-    return Order(
-      id: snap['id'] as int,
-      cutomerId: snap['cutomerId'] as int,
-      productId: snap['productId'] as List<int>,
-      deliveryFee: snap['deliveryFee'] as double,
-      subTotal: snap['subTotal'] as double,
-      total: snap['total'] as double,
-      isAccepted: snap['isAccepted'] as bool,
-      isdelivered: snap['isdelivered'] as bool,
-      orderedDate:
-          DateTime.fromMillisecondsSinceEpoch(snap['orderedDate'] as int),
-    );
   }
 
   String toJson() => json.encode(toMap());

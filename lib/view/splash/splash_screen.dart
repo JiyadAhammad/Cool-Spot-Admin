@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import '../constant/color/colors.dart';
 import '../constant/sizedbox/sizedbox.dart';
-import '../order/order.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
