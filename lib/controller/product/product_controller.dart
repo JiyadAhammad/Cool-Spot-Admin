@@ -1,11 +1,19 @@
+import 'package:cool_spot_admin/service/database/database_service.dart';
 import 'package:get/get.dart';
 
 import '../../model/product/product_model.dart';
 
 class ProductController extends GetxController {
-  List<Product> products = Product.products.obs;
+  final DataBaseService dataBaseService = DataBaseService();
+  var products = <Product>[].obs;
 
-  RxMap<dynamic, dynamic> newProduct = <dynamic, dynamic>{}.obs;
+  @override
+  void onInit() {
+    products.bindStream(dataBaseService.getProduct());
+    super.onInit();
+  }
+
+  var newProduct = {}.obs;
 
   get price => newProduct['price'];
   get quantity => newProduct['quantity'];

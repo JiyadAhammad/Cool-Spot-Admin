@@ -18,13 +18,11 @@ Future<void> main() async {
   await Firebase.initializeApp();
 
   if (shouldUseFirestoreEmulator) {
-    FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
+    FirebaseFirestore.instance.useFirestoreEmulator(
+      'localhost',
+      8080,
+    );
   }
-
-  // if (shouldUseFirestoreEmulator) {
-  //   FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
-  // }
-
   runApp(const MyApp());
 }
 

@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 
 class Order extends Equatable {
 
+  // ignore: always_specify_types
   factory Order.fromSnapshot(snap) {
     return Order(
       id: snap['id'] as int,

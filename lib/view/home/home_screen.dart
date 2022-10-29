@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,6 +26,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // log('${productController.products.length} length of String');
     // final User user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
       drawer: const Navdrawer(),

@@ -30,6 +30,12 @@ class AddProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<String> categories = [
+      'Fresh Jucie',
+      'Cool Drinks',
+      'Water',
+      'IceCream',
+    ];
     return Scaffold(
       backgroundColor: bgColor,
       appBar: CustomAppBar(
@@ -38,7 +44,11 @@ class AddProduct extends StatelessWidget {
         onPressed: () {},
       ),
       body: Padding(
-        padding: const EdgeInsets.only(top: 20, left: 15, right: 15),
+        padding: const EdgeInsets.only(
+          top: 20,
+          left: 15,
+          right: 15,
+        ),
         child: Obx(
           () => ListView(
             physics: const BouncingScrollPhysics(),
@@ -109,22 +119,24 @@ class AddProduct extends StatelessWidget {
                 'id',
                 productController,
               ),
-              textFormFeild(
-                'Product Category',
-                'Category',
-                productController,
-              ),
+              dropDownFormWidget(categories),
+              // textFormFeild(
+              //   'Product Category',
+              //   'catergory',
+              //   productController,
+              // ),
               textFormFeild(
                 'Product Name',
-                'Name',
+                'name',
                 productController,
               ),
               // textFormFeild('Product Price','product',productController,),
               textFormFeild(
                 'Product Description',
-                'Description',
+                'decription',
                 productController,
               ),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
@@ -162,26 +174,24 @@ class AddProduct extends StatelessWidget {
                     backgroundColor: kblack,
                   ),
                   onPressed: () {
-                    log('${productController.newProduct} this is lsit of map');
                     dataBaseService.addProduct(
                       Product(
-                        id: productController.newProduct['id'] as int,
-                        name: productController.newProduct['name'] as String,
-                        catergory:
-                            productController.newProduct['catergory'] as String,
-                        decription: productController.newProduct['decription']
-                            as String,
-                        imageUrl:
-                            productController.newProduct['imageUrl'] as String,
-                        isRecommended: productController
-                            .newProduct['isRecommended'] as bool,
+                        id: productController.newProduct['id'],
+                        name: productController.newProduct['name'],
+                        catergory: productController.newProduct['catergory'],
+                        decription: productController.newProduct['decription'],
+                        imageUrl: productController.newProduct['imageUrl'],
+                        isRecommended:
+                            productController.newProduct['isRecommended'] ??
+                                false,
                         isPopular:
-                            productController.newProduct['isPopular'] as bool,
-                        price: productController.newProduct['price'] as double,
+                            productController.newProduct['isPopular'] ?? false,
+                        price: productController.newProduct['price'].toDouble(),
                         quantity:
-                            productController.newProduct['quantity'] as int,
+                            productController.newProduct['quantity'].toInt(),
                       ),
                     );
+                    log('${productController.newProduct} this is lsit of map');
                   },
                   icon: const Icon(Icons.check),
                   label: const Text('SAVE'),
@@ -192,6 +202,36 @@ class AddProduct extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: const CustomNavBar(),
+    );
+  }
+
+  Widget dropDownFormWidget(List<String> categories) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 10,
+        vertical: 10,
+      ),
+      child: DropdownButtonFormField(
+        iconSize: 20,
+        decoration: InputDecoration(
+          hintText: 'Product Categories',
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16.0),
+            borderSide: const BorderSide(
+              width: 3,
+            ),
+          ),
+        ),
+        items: categories.map(
+          (item) {
+            return DropdownMenuItem(
+              value: item,
+              child: Text(item),
+            );
+          },
+        ).toList(),
+        onChanged: (value) {},
+      ),
     );
   }
 

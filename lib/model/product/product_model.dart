@@ -1,10 +1,11 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class Product extends Equatable {
   Product({
-    required this.id,
+    this.id,
     required this.name,
     required this.catergory,
     required this.decription,
@@ -15,23 +16,21 @@ class Product extends Equatable {
     this.price = 0,
   });
 
-  factory Product.fromSnapshot(snap) {
+  factory Product.fromSnapshot(DocumentSnapshot snap) {
     return Product(
-      id: snap['id'] as int,
-      name: snap['name'] as String,
-      catergory: snap['catergory'] as String,
-      decription: snap['decription'] as String,
-      imageUrl: snap['imageUrl'] as String,
-      isRecommended: snap['isRecommended'] as bool,
-      isPopular: snap['isPopular'] as bool,
-      price: snap['price'] as double,
-      quantity: snap['quantity'] as int,
+      id: snap['id'],
+      name: snap['name'],
+      catergory: snap['catergory'],
+      decription: snap['decription'],
+      imageUrl: snap['imageUrl'],
+      isRecommended: snap['isRecommended'],
+      isPopular: snap['isPopular'],
+      price: snap['price'],
+      quantity: snap['quantity'],
     );
   }
 
- 
-
-  final int id;
+  final String? id;
   final String name;
   final String catergory;
   final String decription;
@@ -42,20 +41,22 @@ class Product extends Equatable {
   double price;
 
   @override
-  List<Object?> get props => <Object>[
-        id,
-        name,
-        catergory,
-        decription,
-        imageUrl,
-        isRecommended,
-        isPopular,
-        quantity,
-        price,
-      ];
+  List<Object?> get props {
+    return [
+      id,
+      name,
+      catergory,
+      decription,
+      imageUrl,
+      isRecommended,
+      isPopular,
+      quantity,
+      price,
+    ];
+  }
 
   Product copyWith({
-    int? id,
+    String? id,
     String? name,
     String? catergory,
     String? decription,
@@ -99,7 +100,7 @@ class Product extends Equatable {
 
   static List<Product> products = <Product>[
     Product(
-      id: 1,
+      id: '1',
       imageUrl:
           'https://img.taste.com.au/RemyDecY/w720-h480-cfill-q80/taste/2020/01/jan20_easy-berry-smoothie-taste-156331-1.jpg',
       name: 'Coca cola',
@@ -112,7 +113,7 @@ class Product extends Equatable {
       quantity: 6,
     ),
     Product(
-      id: 2,
+      id: '2',
       imageUrl:
           'https://3.imimg.com/data3/DS/UB/MY-14503484/soft-drink-500x500.png',
       name: 'Dew',
@@ -125,7 +126,7 @@ class Product extends Equatable {
       quantity: 1,
     ),
     Product(
-      id: 3,
+      id: '3',
       imageUrl:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcawjcJOFIRy1lq3EKx76d4qbV8MfN13CCjg&usqp=CAU',
       name: 'Fresh Lime',
@@ -138,7 +139,7 @@ class Product extends Equatable {
       quantity: 10,
     ),
     Product(
-      id: 4,
+      id: '4',
       imageUrl:
           'https://loveincorporated.blob.core.windows.net/contentimages/main/1249b51f-4258-44f6-8414-221954ae6a79-waterbottlefacts.jpg',
       name: 'Mango Juice',
@@ -151,7 +152,7 @@ class Product extends Equatable {
       quantity: 5,
     ),
     Product(
-      id: 5,
+      id: '5',
       imageUrl:
           'https://loveincorporated.blob.core.windows.net/contentimages/main/1249b51f-4258-44f6-8414-221954ae6a79-waterbottlefacts.jpg',
       name: 'Bisleri',
@@ -164,7 +165,7 @@ class Product extends Equatable {
       quantity: 20,
     ),
     Product(
-      id: 6,
+      id: '6',
       imageUrl:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrTpIC4f7ooBZV6-A_Cpslt9IRRpGbVdoV8A&usqp=CAU',
       name: 'Kinley',
