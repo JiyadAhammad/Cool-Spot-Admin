@@ -120,11 +120,7 @@ class AddProduct extends StatelessWidget {
                 productController,
               ),
               dropDownFormWidget(categories),
-              // textFormFeild(
-              //   'Product Category',
-              //   'catergory',
-              //   productController,
-              // ),
+
               textFormFeild(
                 'Product Name',
                 'name',
@@ -230,7 +226,13 @@ class AddProduct extends StatelessWidget {
             );
           },
         ).toList(),
-        onChanged: (value) {},
+        onChanged: (value) {
+          productController.newProduct.update(
+            'catergory',
+            (_) => value,
+            ifAbsent: () => value,
+          );
+        },
       ),
     );
   }

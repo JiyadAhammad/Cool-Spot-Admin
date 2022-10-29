@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -36,7 +37,7 @@ class ProductCard extends StatelessWidget {
             kheight5,
             Text(
               product.decription,
-              maxLines: 4,
+              maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
             Expanded(
@@ -44,10 +45,14 @@ class ProductCard extends StatelessWidget {
                 children: <Widget>[
                   SizedBox(
                     height: 40,
-                    child: Image.network(
-                      product.imageUrl,
-                      fit: BoxFit.cover,
-                    ),
+                    child: product.imageUrl.isEmpty
+                        ? const CircularProgressIndicator(
+                            strokeWidth: 2.0,
+                          )
+                        : Image.network(
+                            product.imageUrl,
+                            fit: BoxFit.cover,
+                          ),
                   ),
                   kwidth5,
                   Column(

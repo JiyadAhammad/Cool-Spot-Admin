@@ -26,8 +26,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // log('${productController.products.length} length of String');
-    // final User user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
       drawer: const Navdrawer(),
       backgroundColor: bgColor,
@@ -41,19 +39,19 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Expanded(
-              child: ListView.builder(
-                itemCount: productController.products.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Obx(
-                    () => SizedBox(
-                      height: 220,
+              child: Obx(
+                () => ListView.builder(
+                  itemCount: productController.products.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return SizedBox(
+                      height: MediaQuery.of(context).size.width / 1.9,
                       child: ProductCard(
                         product: productController.products[index],
                         index: index,
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ),
           ],

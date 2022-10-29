@@ -8,10 +8,12 @@ class LoginTextFormField extends StatelessWidget {
     required this.prefixIcon,
     required this.hintText,
     required this.userInput,
+    this.visible = false,
   });
   final IconData prefixIcon;
   final String hintText;
   final TextEditingController userInput;
+  final bool visible;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +24,7 @@ class LoginTextFormField extends StatelessWidget {
       ),
       child: TextFormField(
         controller: userInput,
+        obscureText: visible,
         style: const TextStyle(
           fontSize: 20,
           color: kblackText,

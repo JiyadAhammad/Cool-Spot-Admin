@@ -62,6 +62,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
               userInput: userPassword,
               prefixIcon: Icons.https,
               hintText: 'Password',
+              visible: true,
             ),
             kheight20,
             ElevatedButton(

@@ -5,7 +5,7 @@ import '../../model/product/product_model.dart';
 
 class ProductController extends GetxController {
   final DataBaseService dataBaseService = DataBaseService();
-  var products = <Product>[].obs;
+  var products = [].obs;
 
   @override
   void onInit() {
