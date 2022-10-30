@@ -18,7 +18,7 @@ class OrderCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Product> product = Product.products
-        .where((Product item) => order.productId.contains(item.id))
+        .where((item) => order.productId.contains(item.id))
         .toList();
     return Padding(
       padding: const EdgeInsets.only(

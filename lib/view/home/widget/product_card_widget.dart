@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -41,6 +40,7 @@ class ProductCard extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
             Expanded(
+              flex: 2,
               child: Row(
                 children: <Widget>[
                   SizedBox(
@@ -55,65 +55,69 @@ class ProductCard extends StatelessWidget {
                           ),
                   ),
                   kwidth5,
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          const Text(
-                            'Price',
-                          ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width / 2,
-                            child: Slider(
-                              value: product.price,
-                              onChanged: (double value) {
-                                productController.updateProductPrice(
-                                  index,
-                                  product,
-                                  value,
-                                );
-                              },
-                              max: 100,
-                              divisions: 5,
-                              activeColor: kblackIcon,
-                              inactiveColor: kbluegrey,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            const Text(
+                              'Price',
                             ),
-                          ),
-                          Text(
-                            '₹${product.price}',
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: <Widget>[
-                          const Text(
-                            'Qunty',
-                          ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width / 2,
-                            child: Slider(
-                              value: product.quantity.toDouble(),
-                              onChanged: (double value) {
-                                productController.updateProductQuantity(
-                                  index,
-                                  product,
-                                  value.toInt(),
-                                );
-                              },
-                              max: 20,
-                              divisions: 5,
-                              activeColor: kblackIcon,
-                              inactiveColor: kbluegrey,
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 2.1,
+                              child: SizedBox(
+                                child: Slider(
+                                  value: product.price.toDouble(),
+                                  onChanged: (value) {
+                                    productController.updateProductPrice(
+                                      index,
+                                      product,
+                                      value,
+                                    );
+                                  },
+                                  max: 100,
+                                  divisions: 5,
+                                  activeColor: kblackIcon,
+                                  inactiveColor: kbluegrey,
+                                ),
+                              ),
                             ),
-                          ),
-                          Text(
-                            '₹${product.quantity}',
-                          ),
-                        ],
-                      ),
-                    ],
+                            Text(
+                              '₹${product.price}',
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: <Widget>[
+                            const Text(
+                              'Qunty',
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 2,
+                              child: Slider(
+                                value: product.quantity.toDouble(),
+                                onChanged: (double value) {
+                                  productController.updateProductQuantity(
+                                    index,
+                                    product,
+                                    value.toInt(),
+                                  );
+                                },
+                                max: 20,
+                                divisions: 5,
+                                activeColor: kblackIcon,
+                                inactiveColor: kbluegrey,
+                              ),
+                            ),
+                            Text(
+                              '₹${product.quantity}',
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   )
                 ],
               ),

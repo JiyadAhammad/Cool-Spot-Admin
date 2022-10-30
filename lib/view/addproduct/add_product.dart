@@ -126,7 +126,22 @@ class AddProduct extends StatelessWidget {
                 'name',
                 productController,
               ),
-              // textFormFeild('Product Price','product',productController,),
+
+              Row(
+                children: [
+                  NumberFormField(
+                    hintText: 'Product Price',
+                    name: 'price',
+                    productController: productController,
+                  ),
+                  NumberFormField(
+                    hintText: 'Quantity',
+                    name: 'quantity',
+                    productController: productController,
+                  ),
+                ],
+              ),
+
               textFormFeild(
                 'Product Description',
                 'decription',
@@ -150,20 +165,20 @@ class AddProduct extends StatelessWidget {
                   ),
                 ],
               ),
-              sliderWidget(
-                'Price',
-                'price',
-                100,
-                productController,
-                productController.price,
-              ),
-              sliderWidget(
-                'Qanty',
-                'quantity',
-                25,
-                productController,
-                productController.quantity,
-              ),
+              // sliderWidget(
+              //   'Price',
+              //   'price',
+              //   100,
+              //   productController,
+              //   productController.price,
+              // ),
+              // sliderWidget(
+              //   'Qanty',
+              //   'quantity',
+              //   25,
+              //   productController,
+              //   productController.quantity,
+              // ),
               Center(
                 child: ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
@@ -182,9 +197,10 @@ class AddProduct extends StatelessWidget {
                                 false,
                         isPopular:
                             productController.newProduct['isPopular'] ?? false,
-                        price: productController.newProduct['price'].toDouble(),
+                        price:
+                            double.parse(productController.newProduct['price']),
                         quantity:
-                            productController.newProduct['quantity'].toInt(),
+                            int.parse(productController.newProduct['quantity']),
                       ),
                     );
                     log('${productController.newProduct} this is lsit of map');
@@ -339,6 +355,50 @@ class AddProduct extends StatelessWidget {
             ifAbsent: () => value,
           );
         },
+      ),
+    );
+  }
+}
+
+class NumberFormField extends StatelessWidget {
+  const NumberFormField({
+    Key? key,
+    required this.productController,
+    required this.hintText,
+    required this.name,
+  }) : super(key: key);
+
+  final ProductController productController;
+  final String hintText;
+  final String name;
+
+  @override
+  Widget build(BuildContext context) {
+    return Flexible(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 10,
+          vertical: 10,
+        ),
+        child: TextFormField(
+          keyboardType: TextInputType.number,
+          decoration: InputDecoration(
+            hintText: hintText,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16.0),
+              borderSide: const BorderSide(
+                width: 3,
+              ),
+            ),
+          ),
+          onChanged: (dynamic value) {
+            productController.newProduct.update(
+              name,
+              (_) => value,
+              ifAbsent: () => value,
+            );
+          },
+        ),
       ),
     );
   }
