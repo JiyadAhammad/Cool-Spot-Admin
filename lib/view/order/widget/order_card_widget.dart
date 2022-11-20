@@ -36,23 +36,23 @@ class OrderCardWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    ' order id: ${order.id}',
+                    ' order id: {order.id}',
                     style: const TextStyle(
                       color: kblackText,
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text(
-                    DateFormat('dd-MM-yyyy').format(
-                      order.orderedDate,
-                    ),
-                    style: const TextStyle(
-                      color: kblackText,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  // Text(
+                  //   DateFormat('dd-MM-yyyy').format(
+                  //     order.orderedDate,
+                  //   ),
+                  //   style: const TextStyle(
+                  //     color: kblackText,
+                  //     fontSize: 22,
+                  //     fontWeight: FontWeight.bold,
+                  //   ),
+                  // ),
                 ],
               ),
               kheight,

@@ -76,7 +76,7 @@ class ProductCard extends StatelessWidget {
                                       value,
                                     );
                                   },
-                                  max: 100,
+                                  max: 300,
                                   divisions: 5,
                                   activeColor: kblackIcon,
                                   inactiveColor: kbluegrey,

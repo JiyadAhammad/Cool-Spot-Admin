@@ -3,24 +3,24 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 
 class Order extends Equatable {
-
   // ignore: always_specify_types
   factory Order.fromSnapshot(snap) {
     return Order(
-      id: snap['id'] as int,
-      cutomerId: snap['cutomerId'] as int,
-      productId: snap['productId'] as List<int>,
-      deliveryFee: snap['deliveryFee'] as double,
-      subTotal: snap['subTotal'] as double,
-      total: snap['total'] as double,
+      // id: snap['id'] as int,
+      // cutomerId: snap['customerAddress'] as Map<String,dynamic>,
+      cutomerId: snap['customerAddress'] as Map<String, dynamic>,
+      productId: snap['Product'] as List<dynamic>,
+      deliveryFee: snap['deliveryFee'] as String,
+      subTotal: snap['subTotal'] as String,
+      total: snap['total'] as String,
       isAccepted: snap['isAccepted'] as bool,
+      isCanceled: snap['isCanceled'] as bool,
       isdelivered: snap['isdelivered'] as bool,
-      orderedDate:
-          DateTime.fromMillisecondsSinceEpoch(snap['orderedDate'] as int),
+      // orderedDate: snap['orderedDate'].toDate(),
     );
   }
   const Order({
-    required this.id,
+    // required this.id,
     required this.cutomerId,
     required this.productId,
     required this.deliveryFee,
@@ -28,32 +28,35 @@ class Order extends Equatable {
     required this.total,
     required this.isAccepted,
     required this.isdelivered,
-    required this.orderedDate,
+    required this.isCanceled,
+    // required this.orderedDate,
   });
 
-  final int id;
-  final int cutomerId;
-  final List<int> productId;
-  final double deliveryFee;
-  final double subTotal;
-  final double total;
+  // final int id;
+  final Map<String, dynamic> cutomerId;
+  final List<dynamic> productId;
+  final String deliveryFee;
+  final String subTotal;
+  final String total;
   final bool isAccepted;
   final bool isdelivered;
-  final DateTime orderedDate;
+  final bool isCanceled;
+  // final DateTime orderedDate;
 
   Order copyWith({
-    int? id,
-    int? cutomerId,
-    List<int>? productId,
-    double? deliveryFee,
-    double? subTotal,
-    double? total,
+    // int? id,
+    Map<String, dynamic>? cutomerId,
+    List<dynamic>? productId,
+    String? deliveryFee,
+    String? subTotal,
+    String? total,
     bool? isAccepted,
     bool? isdelivered,
-    DateTime? orderedDate,
+    bool? isCanceled,
+    // DateTime? orderedDate,
   }) {
     return Order(
-      id: id ?? this.id,
+      // id: id ?? this.id,
       cutomerId: cutomerId ?? this.cutomerId,
       productId: productId ?? this.productId,
       deliveryFee: deliveryFee ?? this.deliveryFee,
@@ -61,13 +64,14 @@ class Order extends Equatable {
       total: total ?? this.total,
       isAccepted: isAccepted ?? this.isAccepted,
       isdelivered: isdelivered ?? this.isdelivered,
-      orderedDate: orderedDate ?? this.orderedDate,
+      isCanceled: isCanceled ?? this.isCanceled,
+      // orderedDate: orderedDate ?? this.orderedDate,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
+      // 'id': id,
       'cutomerId': cutomerId,
       'productId': productId,
       'deliveryFee': deliveryFee,
@@ -75,7 +79,8 @@ class Order extends Equatable {
       'total': total,
       'isAccepted': isAccepted,
       'isdelivered': isdelivered,
-      'ordered': orderedDate,
+      'isCanceled': isCanceled,
+      // 'ordered': orderedDate,
     };
   }
 
@@ -87,7 +92,7 @@ class Order extends Equatable {
   @override
   List<Object?> get props {
     return <Object?>[
-      id,
+      // id,
       cutomerId,
       productId,
       deliveryFee,
@@ -95,43 +100,47 @@ class Order extends Equatable {
       total,
       isAccepted,
       isdelivered,
-      orderedDate,
+      isCanceled,
+      // orderedDate,
     ];
   }
 
-  static List<Order> order = <Order>[
-    Order(
-      id: 1,
-      cutomerId: 100,
-      productId: const <int>[1, 2],
-      deliveryFee: 20,
-      subTotal: 40,
-      total: 60,
-      isAccepted: false,
-      isdelivered: false,
-      orderedDate: DateTime.now(),
-    ),
-    Order(
-      id: 2,
-      cutomerId: 101,
-      productId: const <int>[1, 2, 3],
-      deliveryFee: 20,
-      subTotal: 60,
-      total: 80,
-      isAccepted: false,
-      isdelivered: false,
-      orderedDate: DateTime.now(),
-    ),
-    Order(
-      id: 2,
-      cutomerId: 101,
-      productId: const <int>[3],
-      deliveryFee: 20,
-      subTotal: 60,
-      total: 80,
-      isAccepted: false,
-      isdelivered: false,
-      orderedDate: DateTime.now(),
-    ),
-  ];
+  // static List<Order> order = <Order>[
+  //   Order(
+  //     // id: 1,
+  //     cutomerId: [],
+  //     productId: const <int>[1, 2],
+  //     deliveryFee: 20,
+  //     subTotal: 40,
+  //     total: 60,
+  //     isAccepted: false,
+  //     isdelivered: false,
+  //     isCanceled: false,
+  //     // orderedDate: DateTime.now(),
+  //   ),
+  //   Order(
+  //     // id: 2,
+  //     cutomerId: [101],
+  //     productId: const <int>[1, 2, 3],
+  //     deliveryFee: 20,
+  //     subTotal: 60,
+  //     total: 80,
+  //     isAccepted: false,
+  //     isdelivered: false,
+  //     isCanceled: false,
+  //     // orderedDate: DateTime.now(),
+  //   ),
+  //   Order(
+  //     // id: 2,
+  //     cutomerId: [101],
+  //     productId: const <int>[3],
+  //     deliveryFee: 20,
+  //     subTotal: 60,
+  //     total: 80,
+  //     isAccepted: false,
+  //     isdelivered: false,
+  //     isCanceled: false,
+  //     // orderedDate: DateTime.now(),
+  //   ),
+  // ];
 }

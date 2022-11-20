@@ -32,7 +32,7 @@ class LoginScreen extends StatelessWidget {
             );
           } else if (snapshot.hasError) {
             return const Center(
-              child: Text('data'),
+              child: Text('Something Went wrong'),
             );
           } else if (snapshot.hasData) {
             return  HomeScreen();

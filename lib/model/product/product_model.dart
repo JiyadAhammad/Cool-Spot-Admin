@@ -18,7 +18,7 @@ class Product extends Equatable {
 
   factory Product.fromSnapshot(DocumentSnapshot snap) {
     return Product(
-      id: snap['id'],
+      id: snap.id,
       name: snap['name'],
       catergory: snap['catergory'],
       decription: snap['decription'],
@@ -81,7 +81,7 @@ class Product extends Equatable {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
+      // 'id': id,
       'name': name,
       'catergory': catergory,
       'decription': decription,

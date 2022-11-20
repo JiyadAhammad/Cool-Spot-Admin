@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
         ),
         GetPage<Ordescreen>(
           name: '/order',
-          page: () => const Ordescreen(),
+          page: () => Ordescreen(),
         ),
         GetPage<AddProduct>(
           name: '/addproduct',

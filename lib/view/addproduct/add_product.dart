@@ -32,9 +32,9 @@ class AddProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     List<String> categories = [
       'Fresh Jucie',
-      'Cool Drinks',
-      'Water',
-      'IceCream',
+      'Burger',
+      'Shawarma',
+      'Pizza',
     ];
     return Scaffold(
       backgroundColor: bgColor,
@@ -114,11 +114,11 @@ class AddProduct extends StatelessWidget {
                 ),
               ),
               kheight,
-              textFormFeild(
-                'Product ID',
-                'id',
-                productController,
-              ),
+              // textFormFeild(
+              //   'Product ID',
+              //   'id',
+              //   productController,
+              // ),
               dropDownFormWidget(categories),
 
               textFormFeild(
@@ -204,6 +204,7 @@ class AddProduct extends StatelessWidget {
                       ),
                     );
                     log('${productController.newProduct} this is lsit of map');
+                    Get.back();
                   },
                   icon: const Icon(Icons.check),
                   label: const Text('SAVE'),
