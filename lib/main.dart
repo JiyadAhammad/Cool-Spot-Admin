@@ -50,9 +50,9 @@ class MyApp extends StatelessWidget {
           name: '/home',
           page: () => HomeScreen(),
         ),
-        GetPage<Ordescreen>(
+        GetPage<OrdersScreen>(
           name: '/order',
-          page: () => Ordescreen(),
+          page: () => OrdersScreen(),
         ),
         GetPage<AddProduct>(
           name: '/addproduct',

@@ -20,8 +20,8 @@ class AppRoute {
         return LoginScreen.route();
       case HomeScreen.routeName:
         return HomeScreen.route();
-      case Ordescreen.routeName:
-        return Ordescreen.route();
+      case OrdersScreen.routeName:
+        return OrdersScreen.route();
       case AddProduct.routeName:
         return AddProduct.route();
       case StatisicScreen.routeName:

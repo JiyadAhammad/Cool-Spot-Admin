@@ -18,7 +18,7 @@ class OrderCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Product> product = Product.products
-        .where((item) => order.productId.contains(item.id))
+        .where((item) => order.productIds.contains(item.id))
         .toList();
     return Padding(
       padding: const EdgeInsets.only(
@@ -43,16 +43,16 @@ class OrderCardWidget extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  // Text(
-                  //   DateFormat('dd-MM-yyyy').format(
-                  //     order.orderedDate,
-                  //   ),
-                  //   style: const TextStyle(
-                  //     color: kblackText,
-                  //     fontSize: 22,
-                  //     fontWeight: FontWeight.bold,
-                  //   ),
-                  // ),
+                  Text(
+                    DateFormat('dd-MM-yyyy').format(
+                      order.createdAt,
+                    ),
+                    style: const TextStyle(
+                      color: kblackText,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ],
               ),
               kheight,
@@ -92,7 +92,7 @@ class OrderCardWidget extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '${order.subTotal}',
+                        '${order.subtotal}',
                         style: const TextStyle(
                           color: kblackText,
                           fontSize: 20,

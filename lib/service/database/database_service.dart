@@ -26,16 +26,33 @@ class DataBaseService {
   }
 
   Stream<List<Order>> getOrders() {
-    return firebaseFirestore.collection('checkout').snapshots().map(
-      (QuerySnapshot<Map<String, dynamic>> snapshot) {
-        // return snapshot.docs.map((item) => Order.fromSnapshot(item)).toList();
-        return snapshot.docs
-            .map((QueryDocumentSnapshot<Map<String, dynamic>> doc) =>
-                Order.fromSnapshot(doc))
-            .toList();
-      },
-    );
+    return firebaseFirestore.collection('checkout').snapshots().map((snapshot) {
+      return snapshot.docs.map((doc) => Order.fromSnapshot(doc)).toList();
+    });
   }
 
-  
+  Stream<List<Order>> getPendingOrders() {
+    return firebaseFirestore
+        .collection('orders')
+        .where('isCancelled', isEqualTo: false)
+        .where('isDelivered', isEqualTo: false)
+        .snapshots()
+        .map((snapshot) {
+      return snapshot.docs.map((doc) => Order.fromSnapshot(doc)).toList();
+    });
+  }
+
+  Future<void> updateOrder(
+    Order order,
+    String field,
+    dynamic newValue,
+  ) {
+    return firebaseFirestore
+        .collection('orders')
+        .where('id', isEqualTo: order.id)
+        .get()
+        .then((querySnapshot) => {
+              querySnapshot.docs.first.reference.update({field: newValue})
+            });
+  }
 }
